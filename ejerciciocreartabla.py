@@ -58,6 +58,7 @@ cursor = bd.cursor()
 crear_tabla(cursor)
 
 while True:
+    
     print("ingrese la opcion que desea ejecutar ")
     print("Opción 1: Insertar un registro de empleado")
     print("Opción 2: Seleccionar un registro de empleado a partir de su número de DNI")
@@ -67,24 +68,35 @@ while True:
     print("Opción 6: Finalizar")
     opcion=input("ingrese la opcion: ")
     if opcion =="1":
-        valores=[]
-        valor0=int(input("ingrese un id: "))
-        valores.append(valor0)
-        valor1=int(input("ingrese el numero de legajo "))
-        valores.append(valor1)
-        valor2=int(input("ingrese el dni: "))
-        valores.append(valor2)
-        valor3=input("ingrese el nombre: ")
-        valores.append(valor3)
-        valor4=input("ingrese el apellido: ")
-        valores.append(valor4)
-        valor5=input("ingrese el area en la que trabaja: ")
-        valores.append(valor5)
-        
-        insertar_nuevo_registro(cursor,valores)    
+        while True:
+            try:
+                valores=[]
+                valor0=int(input("ingrese un id: "))
+                valores.append(valor0)
+                valor1=int(input("ingrese el numero de legajo "))
+                valores.append(valor1)
+                valor2=int(input("ingrese el dni: "))
+                valores.append(valor2)
+                valor3=input("ingrese el nombre: ")
+                valores.append(valor3)
+                valor4=input("ingrese el apellido: ")
+                valores.append(valor4)
+                valor5=input("ingrese el area en la que trabaja: ")
+                valores.append(valor5)
+                bd=conection_db()
+                insertar_nuevo_registro(cursor,valores)  
+                salir=input("¿desea continuar ingresando registros? s/n: ")
+                if salir=="n":
+                    break
+            except ValueError:
+                print("ingrese los datos del tipo correcto")
+           
     elif opcion =="2":
-        seleccionar_unregistro(cursor,input("ingrese un dni: "))
-        conection_db()
+        try:
+            seleccionar_unregistro(cursor,input("ingrese un dni: "))
+            bd=conection_db()
+        except ValueError:
+            print("ingrese un dni correcto")
     elif opcion =="3":
         seleccionar_todos_registros(cursor)
         conection_db()
@@ -92,11 +104,11 @@ while True:
         numero_legajo =int(input("ingrese el numero de legajo: "))
         area = input("ingrese la nueva area: ")
         modificar_registros(cursor,numero_legajo,area)
-        conection_db()
+        bd=conection_db()
     elif opcion == "5":
         numero_legajo = int(input("ingrese el numero de legajo: "))
         eliminar_registros(cursor,numero_legajo)
-        conection_db()
+        bd=conection_db()
         
     else :
         bd.close()
