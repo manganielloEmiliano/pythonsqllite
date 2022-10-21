@@ -93,6 +93,7 @@ while True:
            
     elif opcion =="2":
         try:
+            bd=conection_db()
             seleccionar_unregistro(cursor,input("ingrese un dni: "))
             bd=conection_db()
         except ValueError:
@@ -106,6 +107,7 @@ while True:
         modificar_registros(cursor,numero_legajo,area)
         bd=conection_db()
     elif opcion == "5":
+        bd=conection_db()
         numero_legajo = int(input("ingrese el numero de legajo: "))
         eliminar_registros(cursor,numero_legajo)
         bd=conection_db()
