@@ -1,3 +1,4 @@
+from pickle import TRUE
 import sqlite3
 
 
@@ -95,8 +96,12 @@ while True:
     elif opcion =="2":
         try:
             bd=conection_db()
-            seleccionar_unregistro(cursor,input("ingrese un dni: "))
-            
+            while TRUE:
+                try:
+                    seleccionar_unregistro(cursor,input("ingrese un dni: "))
+                    break
+                except ValueError:
+                    print("el dni debe ser numerico")
         except ValueError:
             print("ingrese un dni correcto")
     elif opcion =="3":
@@ -111,6 +116,7 @@ while True:
                 area = input("ingrese la nueva area: ")
                 modificar_registros(cursor,numero_legajo,area)
                 bd=conection_db()
+                break
             except ValueError:
                 print("el legajo debe ser numerico")
     elif opcion == "5":
