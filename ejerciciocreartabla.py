@@ -96,12 +96,13 @@ while True:
         try:
             bd=conection_db()
             seleccionar_unregistro(cursor,input("ingrese un dni: "))
-            bd=conection_db()
+            
         except ValueError:
             print("ingrese un dni correcto")
     elif opcion =="3":
-        seleccionar_todos_registros(cursor)
         conection_db()
+        seleccionar_todos_registros(cursor)
+        
     elif opcion == "4":
         bd=conection_db()
         numero_legajo =int(input("ingrese el numero de legajo: "))
