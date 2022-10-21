@@ -24,16 +24,16 @@ def insertar_nuevo_registro(cursor,valores):
     bd.close()
 
 def seleccionar_unregistro(cursor,dni):
-    conection_db()
+   
     cursor.execute('SELECT * FROM empleados WHERE dni=?', [dni])
     print(cursor.fetchone())
-    bd.close()
+  
 
 def seleccionar_todos_registros(cursor):
-    conection_db()
+    
     cursor.execute('SELECT * FROM empleados',)
     print(cursor.fetchall())
-    bd.close()
+   
 
 def modificar_registros(cursor, numero_legajo,area):
     conection_db()
@@ -99,5 +99,6 @@ while True:
         conection_db()
         
     else :
+        bd.close()
         break
     
