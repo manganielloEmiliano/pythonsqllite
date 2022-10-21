@@ -105,10 +105,14 @@ while True:
         
     elif opcion == "4":
         bd=conection_db()
-        numero_legajo =int(input("ingrese el numero de legajo: "))
-        area = input("ingrese la nueva area: ")
-        modificar_registros(cursor,numero_legajo,area)
-        bd=conection_db()
+        while True:
+            try:
+                numero_legajo =int(input("ingrese el numero de legajo: "))
+                area = input("ingrese la nueva area: ")
+                modificar_registros(cursor,numero_legajo,area)
+                bd=conection_db()
+            except ValueError:
+                print("el legajo debe ser numerico")
     elif opcion == "5":
         bd=conection_db()
         while True:
