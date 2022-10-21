@@ -84,15 +84,19 @@ while True:
         insertar_nuevo_registro(cursor,valores)    
     elif opcion =="2":
         seleccionar_unregistro(cursor,input("ingrese un dni: "))
+        conection_db()
     elif opcion =="3":
         seleccionar_todos_registros(cursor)
+        conection_db()
     elif opcion == "4":
         numero_legajo =int(input("ingrese el numero de legajo: "))
         area = input("ingrese la nueva area: ")
         modificar_registros(cursor,numero_legajo,area)
+        conection_db()
     elif opcion == "5":
         numero_legajo = int(input("ingrese el numero de legajo: "))
         eliminar_registros(cursor,numero_legajo)
+        conection_db()
         
     else :
         break
