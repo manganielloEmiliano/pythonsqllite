@@ -111,7 +111,12 @@ while True:
         bd=conection_db()
     elif opcion == "5":
         bd=conection_db()
-        numero_legajo = int(input("ingrese el numero de legajo: "))
+        while True:
+            try:
+                numero_legajo = int(input("ingrese el numero de legajo: "))
+                break
+            except ValueError:
+                print("ingrese un valor entero")    
         eliminar_registros(cursor,numero_legajo)
         bd=conection_db()
         
