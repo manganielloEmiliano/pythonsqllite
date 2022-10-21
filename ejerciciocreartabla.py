@@ -17,15 +17,40 @@ def crear_tabla(cursor):
 	PRIMARY KEY("id"));'''
     )
 
-def insertar_nuevo_registro(bd,cursor,valores):
-    
+def insertar_nuevo_registro(cursor,valores):
+    conection_db()
     cursor.execute("INSERT INTO empleados VALUES(?,?,?,?,?,?)",valores)
     bd.commit()
     bd.close()
 
 def seleccionar_unregistro(cursor,dni):
+    conection_db()
     cursor.execute('SELECT * FROM empleados WHERE dni=?', [dni])
     print(cursor.fetchone())
+    bd.close()
+
+def seleccionar_todos_registros(cursor):
+    conection_db()
+    cursor.execute('SELECT * FROM empleados',)
+    print(cursor.fetchall())
+    bd.close()
+
+def modificar_registros(cursor, numero_legajo,area):
+    conection_db()
+    sentencia = "UPDATE empleados SET area = ?  WHERE numero_legajo = ?;"
+    cursor.execute(sentencia, [area, numero_legajo])
+    bd.commit()
+    bd.close()
+    print("Datos guardados")
+
+
+def eliminar_registros(cursor, numero_legajo):
+    conection_db()
+    sentencia = "DELETE FROM empleados WHERE numero_legajo = ?;"
+    cursor.execute(sentencia, [numero_legajo])
+    bd.commit()
+    bd.close()
+    print("Datos eliminados")
 
 bd=conection_db()
 cursor = bd.cursor()
@@ -43,7 +68,7 @@ while True:
     opcion=input("ingrese la opcion: ")
     if opcion =="1":
         valores=[]
-        valor0=int(input("ingrese un id"))
+        valor0=int(input("ingrese un id: "))
         valores.append(valor0)
         valor1=int(input("ingrese el numero de legajo "))
         valores.append(valor1)
@@ -56,10 +81,19 @@ while True:
         valor5=input("ingrese el area en la que trabaja: ")
         valores.append(valor5)
         
-        insertar_nuevo_registro(bd,cursor,valores)
-        
+        insertar_nuevo_registro(cursor,valores)    
     elif opcion =="2":
         seleccionar_unregistro(cursor,input("ingrese un dni: "))
-    elif opcion =="6":
+    elif opcion =="3":
+        seleccionar_todos_registros(cursor)
+    elif opcion == "4":
+        numero_legajo =int(input("ingrese el numero de legajo: "))
+        area = input("ingrese la nueva area: ")
+        modificar_registros(cursor,numero_legajo,area)
+    elif opcion == "5":
+        numero_legajo = int(input("ingrese el numero de legajo: "))
+        eliminar_registros(cursor,numero_legajo)
+        
+    else :
         break
     
