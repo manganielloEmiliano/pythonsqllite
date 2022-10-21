@@ -70,6 +70,7 @@ while True:
     if opcion =="1":
         while True:
             try:
+                
                 valores=[]
                 valor0=int(input("ingrese un id: "))
                 valores.append(valor0)
@@ -102,6 +103,7 @@ while True:
         seleccionar_todos_registros(cursor)
         conection_db()
     elif opcion == "4":
+        bd=conection_db()
         numero_legajo =int(input("ingrese el numero de legajo: "))
         area = input("ingrese la nueva area: ")
         modificar_registros(cursor,numero_legajo,area)
