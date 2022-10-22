@@ -1,4 +1,3 @@
-from pickle import TRUE
 import sqlite3
 
 
@@ -42,7 +41,7 @@ def modificar_registros(cursor, numero_legajo,area):
     cursor.execute(sentencia, [area, numero_legajo])
     bd.commit()
     bd.close()
-    print("Datos guardados")
+    print("el area de trabajo del empleado con el legajo {} fue actualizada a{}".format(numero_legajo,area))
 
 
 def eliminar_registros(cursor, numero_legajo):
@@ -104,6 +103,7 @@ while True:
                     print("el dni debe ser numerico")
         except ValueError:
             print("ingrese un dni correcto")
+    
     elif opcion =="3":
         conection_db()
         seleccionar_todos_registros(cursor)
