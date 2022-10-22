@@ -1,3 +1,4 @@
+
 import sqlite3
 
 
@@ -14,12 +15,12 @@ def crear_tabla(cursor):
 	"nombre_empleado"	TEXT NOT NULL,
 	"apellido_empleado"	TEXT NOT NULL,
 	"area"	TEXT NOT NULL,
-	PRIMARY KEY("id"));'''
+	PRIMARY KEY("id"AUTOINCREMENT));'''
     )
 
 def insertar_nuevo_registro(cursor,valores):
     conection_db()
-    cursor.execute("INSERT INTO empleados VALUES(?,?,?,?,?,?)",valores)
+    cursor.execute("INSERT INTO empleados VALUES(NULL,?,?,?,?,?)",valores)
     bd.commit()
     bd.close()
 
@@ -72,8 +73,7 @@ while True:
             try:
                 
                 valores=[]
-                valor0=int(input("ingrese un id: "))
-                valores.append(valor0)
+                
                 valor1=int(input("ingrese el numero de legajo "))
                 valores.append(valor1)
                 valor2=int(input("ingrese el dni: "))
