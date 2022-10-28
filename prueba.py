@@ -55,12 +55,13 @@ def eliminar_registros(bd, cursor, numero_legajo):
     print("Datos eliminados")
     bd.close()
 
-    bd = conection_db
-    cursor = bd.cursor()
-    crear_tabla(cursor)
+ 
 
 
 while True:
+    bd = conection_db
+    cursor = bd.cursor()
+    crear_tabla(cursor)
    
     
 
@@ -88,13 +89,12 @@ while True:
             valores.append(valor4)
             valor5 = input("ingrese el area en la que trabaja: ")
             valores.append(valor5)
-            bd.conection_db()
+            
             insertar_nuevo_registro(bd, cursor, valores)
-           
         except ValueError:
             print("ingrese los datos del tipo correcto")
     elif opcion == "2":
-        bd.conection_db()
+       
         while True:
             try:
                 seleccionar_unregistro(cursor, input("ingrese un dni: "))
@@ -102,10 +102,10 @@ while True:
             except ValueError:
                 print("el dni debe ser numerico")
     elif opcion == "3":
-        bd.conection_db()
+       
         seleccionar_todos_registros(cursor)
     elif opcion == "4":
-        bd.conection_db()
+        
         while True:
             try:
                 numero_legajo = int(input("ingrese el numero de legajo: "))
@@ -116,7 +116,7 @@ while True:
             except ValueError:
                 print("el legajo debe ser numerico")
     elif opcion == "5":
-        bd.conection_db()
+        
         while True:
             try:
                 numero_legajo = int(input("ingrese el numero de legajo: "))
@@ -125,6 +125,5 @@ while True:
                 print("ingrese un valor entero")
         eliminar_registros(bd, cursor, numero_legajo)
     else:
-        bd.commit()
-        bd.close()
+        
         break
