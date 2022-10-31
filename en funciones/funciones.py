@@ -1,10 +1,8 @@
 import sqlite3
+
 def conection_db():
     bd = sqlite3.connect("Empleados.db")
-    cursor = bd.cursor()
-    return bd, cursor
-
-
+    return bd, bd.cursor()
 
 def crear_tabla():
     bd,cursor = conection_db()
@@ -15,12 +13,12 @@ def crear_tabla():
 	"nombre_empleado"	TEXT NOT NULL,
 	"apellido_empleado"	TEXT NOT NULL,
 	"area"	TEXT NOT NULL,
-	PRIMARY KEY("id" AUTOINCREMENT));''')
+	PRIMARY KEY("id"AUTOINCREMENT));''')
 
 
 def insertar_nuevo_registro(valores):
     bd,cursor = conection_db()
-    cursor.execute('INSERT INTO empleados (id,numero_legajo, dni, nombre_empleado, apellido_empleado, area) VALUES(NULL,?,?,?,?,?)', valores)
+    cursor.execute("INSERT INTO empleados(numero_legajo,dni,nombre_empleado) VALUES(?,?,?,?,?)", valores)
     bd.commit()
     bd.close()
 
@@ -32,12 +30,16 @@ def seleccionar_unregistro(dni):
 
 
 def seleccionar_todos_registros():
-    bd,cursor = conection_db()
-
+    db,cursor = conection_db()
     cursor.execute('SELECT * FROM empleados',)
-    print(cursor.fetchall())
-    bd.commit()
-    bd.close()
+    
+    #recorrer los registros
+    lista = cursor.fetchall()
+    for registro in lista:
+        print(registro[2])
+    ###########
+    db.commit()
+    db.close()
 
 
 def modificar_registros(numero_legajo, area):
@@ -46,7 +48,8 @@ def modificar_registros(numero_legajo, area):
     cursor.execute(sentencia, [area, numero_legajo])
     bd.commit()
     bd.close()
-    print("el area de trabajo del empleado con el legajo {} fue actualizada a{}".format(numero_legajo, area))
+    print("el area de trabajo del empleado con el legajo {} fue actualizada a{}".format(
+        numero_legajo, area))
 
 
 def eliminar_registros(numero_legajo):
