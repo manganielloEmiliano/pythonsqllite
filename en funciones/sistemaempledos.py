@@ -1,8 +1,7 @@
-import sqlite3
 import funciones
 
 while True:
-    bd, cursor = funciones.conection_db()
+
     funciones.crear_tabla()
 
     print("ingrese la opcion que desea ejecutar ")
@@ -15,28 +14,19 @@ while True:
     opcion = input("ingrese la opcion: ")
     if opcion == "1":
         while True:
-
-            try:
-
-                valores = []
-
-                valor1 = int(input("ingrese el numero de legajo "))
-                valores.append(valor1)
-                valor2 = int(input("ingrese el dni: "))
-                valores.append(valor2)
-                valor3 = input("ingrese el nombre: ")
-                valores.append(valor3)
-                valor4 = input("ingrese el apellido: ")
-                valores.append(valor4)
-                valor5 = input("ingrese el area en la que trabaja: ")
-                valores.append(valor5)
-
-                funciones.insertar_nuevo_registro(valores)
-                break
-            except ValueError:
-                print("ingrese los datos del tipo correcto")
-            except sqlite3.OperationalError:
-                print("Error al abrir la base de datos")
+            valores = []
+            valor1 = int(input("ingrese el numero de legajo "))
+            valores.append(valor1)
+            valor2 = int(input("ingrese el dni: "))
+            valores.append(valor2)
+            valor3 = input("ingrese el nombre: ")
+            valores.append(valor3)
+            valor4 = input("ingrese el apellido: ")
+            valores.append(valor4)
+            valor5 = input("ingrese el area en la que trabaja: ")
+            valores.append(valor5)
+            funciones.insertar_nuevo_registro(valores)
+            break
 
     elif opcion == "2":
         try:
